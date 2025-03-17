@@ -11,7 +11,6 @@
 .env.production
 .phpactor.json
 .phpunit.result.cache
-fix.py
 Homestead.json
 Homestead.yaml
 auth.json
@@ -21,3 +20,4 @@ yarn-error.log
 /.idea
 /.vscode
 /.zed
+/container
