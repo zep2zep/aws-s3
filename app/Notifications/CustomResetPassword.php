@@ -11,11 +11,9 @@ class CustomResetPassword extends ResetPassword
     {
         return (new MailMessage)
             ->subject('Reimposta la tua password')
-            ->greeting('Ciao ' . $notifiable->name . '!')
-            ->line('Hai richiesto di reimpostare la tua password su **aws-s3-six.vercel.app**.')
-            ->action('Resetta la Password', url(config('app.url') . route('password.reset', $this->token, false)))
-            ->line('Se non hai richiesto questa email, puoi ignorarla.')
-            ->salutation('A presto, **Il Team di Sestapertica**')
-            ->markdown('vendor.notifications.email');
+            ->view('emails.reset-password', [
+                'name' => $notifiable->name,
+                'actionUrl' => url(route('password.reset', ['token' => $this->token], true))
+            ]);
     }
 }
