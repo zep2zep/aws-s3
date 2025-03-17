@@ -30,7 +30,7 @@
                 <p class="text-lg text-white">
                     Benvenuti nel mio angolo virtuale di caos creativo, <br>
                     dove il buon senso fa spesso una pausa caffè e l'arguzia è l'unica moneta accettata.<br>
-                    <span class="mt-2 text-sm text-gray-400">[V0.0.2 del 2025-03-16]</span>
+                    <span class="mt-2 text-sm text-gray-400">[V0.0.3 del 2025-03-17]</span>
                 </p>
             </div>
             <!-- Footer in basso -->
