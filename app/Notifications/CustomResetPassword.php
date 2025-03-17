@@ -15,6 +15,7 @@ class CustomResetPassword extends ResetPassword
             ->line('Hai richiesto di reimpostare la tua password su **aws-s3-six.vercel.app**.')
             ->action('Resetta la Password', url(config('app.url') . route('password.reset', $this->token, false)))
             ->line('Se non hai richiesto questa email, puoi ignorarla.')
-            ->salutation('A presto, **Il Team di Sestapertica**');
+            ->salutation('A presto, **Il Team di Sestapertica**')
+            ->markdown('vendor.notifications.email');
     }
 }
