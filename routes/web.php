@@ -43,9 +43,8 @@ Route::get('/about', function () {
 });
 
 Route::get('/user', function () {
-    return view('user');
+    return view('users.user'); // Aggiungi il prefisso "users."
 })->middleware('auth')->name('user');
-
 
 
 Route::get('/testconn', [ToolController::class, 'testConnections'])->name('testconn');
