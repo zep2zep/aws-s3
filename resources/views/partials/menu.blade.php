@@ -69,7 +69,7 @@
                 </ul>
             @endguest
 
-            <!-- Logout per gli utenti autenticati -->
+
             @auth
                 <ul class="navbar-nav mb-lg-0 mb-2 ms-auto">
                     <li class="nav-item">
@@ -85,6 +85,7 @@
                             <li><a class="dropdown-item text-white" href="{{ url('/products') }}">ALL PRODUCT</a></li>
                         </ul>
                     </li>
+                    <!-- Logout per gli utenti autenticati -->
                     <li class="nav-item">
                         <form id="logout-form" action="{{ route('logoutUser') }}" method="POST" class="d-inline">
                             @csrf

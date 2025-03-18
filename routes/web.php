@@ -6,16 +6,15 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\ToolController;
 use App\Http\Controllers\LogAccessController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\ProductController;
+
 
 Auth::routes();
 
-
 //Route caricamento dell'immagine:
 Route::put('/upload-image', [ImageUploadController::class, 'upload'])->name('upload.image');
-
 
 // Mostra il form per richiedere il reset della password
 Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])
@@ -53,7 +52,6 @@ Route::get('/log-accessi', [LogAccessController::class, 'index'])->name('log.acc
 
 Route::post('/reset.log', [LogAccessController::class, 'reset'])->name('log.reset');
 
-
 //Route per login
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [UserController::class, 'login'])->name('loginUser');
@@ -64,3 +62,6 @@ Route::post('/logout', [UserController::class, 'logout'])->name('logoutUser');
 //Route per la registrazione
 Route::get('/register', [UserController::class, 'showRegistrationForm'])->name('showRegistrationForm');
 Route::post('/register', [UserController::class, 'register'])->name('registerUser');
+
+//Route per products
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
