@@ -13,6 +13,12 @@ use App\Http\Controllers\ProductController;
 
 Auth::routes();
 
+
+Route::get('/test-env', function () {
+    dd(env('MAIL_ADMIN'));
+});
+
+
 //Route caricamento dell'immagine:
 Route::put('/upload-image', [ImageUploadController::class, 'upload'])->name('upload.image');
 

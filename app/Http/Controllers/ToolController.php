@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Mail\TestConnectionMail;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail; // ✅ Importa la facade Mail
 
 class ToolController extends Controller
 {
@@ -67,6 +68,14 @@ class ToolController extends Controller
                     'message' => "Database '$label' - Errore #" . $e->getCode() . ": " . $e->getMessage()
                 ];
             }
+        }
+
+        // **Invio Email**
+        try {
+            Mail::to(env('MAIL_ADMIN'))->send(new TestConnectionMail($results));
+            session()->flash('success', 'Email inviata con successo! 📩');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Errore nell\'invio della mail: ' . $e->getMessage());
         }
 
         return view('testconn', compact('results'));
