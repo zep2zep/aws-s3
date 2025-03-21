@@ -57,6 +57,7 @@
                         <ul class="dropdown-menu custom-dropdown" aria-labelledby="navbarToolDropdown">
                             <li><a class="dropdown-item" href="{{ url('/testconn') }}">Test Connessione</a></li>
                             <li><a class="dropdown-item" href="{{ url('/log-accessi') }}">Log Accessi</a></li>
+                            <li><a class="dropdown-item" href="{{ url('/ipinfo') }}">IP Info</a></li>
                         </ul>
                     </li>
 

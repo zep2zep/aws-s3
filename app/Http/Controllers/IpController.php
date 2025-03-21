@@ -7,17 +7,21 @@ use Illuminate\Support\Facades\Http;
 
 class IpController extends Controller
 {
-    public function getIpDetails($ip = null)
+    public function getIpDetails()
     {
-        $ip = $ip ?? request()->header('X-Forwarded-For') ?? request()->ip();
-        $token = env('IPINFO_API_KEY'); // Usa il token API da .env
+        $ip = request()->header('X-Forwarded-For') ?? request()->ip();
 
-        $response = Http::get("https://ipinfo.io/{$ip}/json?token={$token}");
-
-        if ($response->successful()) {
-            return response()->json($response->json());
+        // FORZA UN IP PER TEST IN LOCALE
+        if ($ip == "127.0.0.1" || $ip == "::1") {
+            $ip = "8.8.8.8"; // IP pubblico di Google (per test)
         }
 
-        return response()->json(['error' => 'Impossibile recuperare le informazioni IP'], 500);
+        // Chiamata API ipinfo.io
+        $token = env('IPINFO_TOKEN');
+        $url = "https://ipinfo.io/{$ip}/json?token={$token}";
+
+        $response = Http::get($url)->json();
+
+        return view('ipinfo', ['ipData' => $response]);
     }
 }

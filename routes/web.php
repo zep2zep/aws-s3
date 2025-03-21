@@ -12,14 +12,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\IpController;
 
 
-Route::get('/ip-info', [IpController::class, 'getIpDetails']);
-
+Route::get('/ip-info', [IpController::class, 'getIpDetails'])->name('ipinfo');
+Route::get('/ipinfo', [IpController::class, 'getIpDetails'])->name('ipinfo');
 Auth::routes();
-
-
-Route::get('/test-env', function () {
-    dd(env('MAIL_ADMIN'));
-});
 
 
 //Route caricamento dell'immagine:
