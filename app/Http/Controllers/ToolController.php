@@ -36,7 +36,7 @@ class ToolController extends Controller
 
                 DB::table('log_accessi')->insert([
                     'timestamp' => now(),
-                    'ip_address' => request()->ip(),
+                    'ip_address' => request()->header('X-Forwarded-For') ?? request()->ip(),
                     'browser' => $browser,
                 ]);
             } catch (\Exception $e) {
