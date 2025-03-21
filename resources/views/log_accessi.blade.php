@@ -10,14 +10,6 @@
             <div class="col-md-8">
                 <h2 class="mb-4 text-center text-white">📜 Log Accessi</h2>
 
-                <!-- Messaggi di Successo / Errore -->
-                @if (session('success'))
-                    <div class="alert alert-success text-center">{{ session('success') }}</div>
-                @endif
-                @if (session('error'))
-                    <div class="alert alert-danger text-center">{{ session('error') }}</div>
-                @endif
-
                 <!-- Pulsante Reset con Spaziatura -->
                 <div class="mb-3 text-center">
                     <form action="{{ url('reset.log') }}" method="POST">
@@ -27,28 +19,32 @@
                 </div>
 
                 <!-- Tabella Log Accessi -->
-<div class="card opacity-75 shadow-lg">
-    <div class="card-body">
-        <div style="max-height: 400px; overflow-y: auto;"> <!-- ✅ Aggiunto il contenitore scrollabile -->
-            <table class="table-bordered bg-light table text-center">
-                <thead class="table-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>Orario di accesso</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($logs as $log)
-                        <tr>
-                            <td>{{ $log->id }}</td>
-                            <td>{{ $log->timestamp }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+                <div class="card opacity-75 shadow-lg">
+                    <div class="card-body">
+                        <div style="max-height: 400px; overflow-y: auto;"> <!-- ✅ Aggiunto il contenitore scrollabile -->
+                            <table class="table-bordered bg-light table text-center">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Ora di accesso</th>
+                                        <th>Indirizzo IP</th>
+                                        <th>Browser</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($logs as $log)
+                                        <tr>
+                                            <td>{{ $log->id }}</td>
+                                            <td>{{ $log->timestamp }}</td>
+                                            <td>{{ $log->ip_address }}</td>
+                                            <td>{{ Str::before($log->browser, '/') }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>

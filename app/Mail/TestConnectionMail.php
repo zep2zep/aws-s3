@@ -12,16 +12,24 @@ class TestConnectionMail extends Mailable
     use Queueable, SerializesModels;
 
     public $results;
+    public $ipAddress;
+    public $browser;
 
-    public function __construct($results)
+    public function __construct($results, $ipAddress, $browser)
     {
         $this->results = $results;
+        $this->ipAddress = $ipAddress;
+        $this->browser = $browser;
     }
 
     public function build()
     {
-        return $this->subject('🖧 Report Test Connessioni')
-            ->view('emails.test_connection') // Usa una vista dedicata per l'email
-            ->with(['results' => $this->results]);
+        return $this->subject('🔍 Test Connessione Database')
+            ->view('emails.test_connection')
+            ->with([
+                'results' => $this->results,
+                'ipAddress' => $this->ipAddress,
+                'browser' => $this->browser
+            ]);
     }
 }

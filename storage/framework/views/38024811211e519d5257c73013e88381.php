@@ -8,14 +8,6 @@
             <div class="col-md-8">
                 <h2 class="mb-4 text-center text-white">📜 Log Accessi</h2>
 
-                <!-- Messaggi di Successo / Errore -->
-                <?php if(session('success')): ?>
-                    <div class="alert alert-success text-center"><?php echo e(session('success')); ?></div>
-                <?php endif; ?>
-                <?php if(session('error')): ?>
-                    <div class="alert alert-danger text-center"><?php echo e(session('error')); ?></div>
-                <?php endif; ?>
-
                 <!-- Pulsante Reset con Spaziatura -->
                 <div class="mb-3 text-center">
                     <form action="<?php echo e(url('reset.log')); ?>" method="POST">
@@ -25,28 +17,32 @@
                 </div>
 
                 <!-- Tabella Log Accessi -->
-<div class="card opacity-75 shadow-lg">
-    <div class="card-body">
-        <div style="max-height: 400px; overflow-y: auto;"> <!-- ✅ Aggiunto il contenitore scrollabile -->
-            <table class="table-bordered bg-light table text-center">
-                <thead class="table-dark">
-                    <tr>
-                        <th>ID</th>
-                        <th>Orario di accesso</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $__currentLoopData = $logs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $log): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <tr>
-                            <td><?php echo e($log->id); ?></td>
-                            <td><?php echo e($log->timestamp); ?></td>
-                        </tr>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+                <div class="card opacity-75 shadow-lg">
+                    <div class="card-body">
+                        <div style="max-height: 400px; overflow-y: auto;"> <!-- ✅ Aggiunto il contenitore scrollabile -->
+                            <table class="table-bordered bg-light table text-center">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Ora di accesso</th>
+                                        <th>Indirizzo IP</th>
+                                        <th>Browser</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $__currentLoopData = $logs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $log): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <tr>
+                                            <td><?php echo e($log->id); ?></td>
+                                            <td><?php echo e($log->timestamp); ?></td>
+                                            <td><?php echo e($log->ip_address); ?></td>
+                                            <td><?php echo e(Str::before($log->browser, '/')); ?></td>
+                                        </tr>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
