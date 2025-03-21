@@ -9,7 +9,10 @@ use App\Http\Controllers\LogAccessController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\IpController;
 
+
+Route::get('/ip-info', [IpController::class, 'getIpDetails']);
 
 Auth::routes();
 
