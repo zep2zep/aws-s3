@@ -32,6 +32,14 @@ Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEm
 Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])
     ->name('password.reset');
 
+// Mostra il form per cambiare la password senza token
+Route::middleware(['auth'])->group(function () {
+    Route::get('password/change', [ResetPasswordController::class, 'showChangePasswordForm'])
+        ->name('password.change');
+    Route::post('password/update', [ResetPasswordController::class, 'updatePassword'])
+        ->name('password.update');
+});
+
 // Salva la nuova password
 Route::post('password/reset', [ResetPasswordController::class, 'reset'])
     ->name('password.update');
@@ -69,3 +77,4 @@ Route::post('/register', [UserController::class, 'register'])->name('registerUse
 
 //Route per products
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+

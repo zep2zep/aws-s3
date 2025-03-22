@@ -29,7 +29,7 @@
                         <td class="border border-gray-600 px-4 py-2">{{ $ipData['country'] ?? 'N/A' }}</td>
                     </tr>
                     <tr class="bg-gray-700">
-                        <td class="border border-gray-600 px-4 py-2 font-semibold">📍 Location</td>
+                        <td class="border border-gray-600 px-4 py-2 font-semibold">📍Location</td>
                         <td class="border border-gray-600 px-4 py-2">{{ $ipData['loc'] ?? 'N/A' }}</td>
                     </tr>
                     <tr class="bg-gray-800">

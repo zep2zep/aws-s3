@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use App\Notifications\CustomResetPassword;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 class ResetPasswordController extends Controller
 {
     use ResetsPasswords;
@@ -31,5 +34,28 @@ class ResetPasswordController extends Controller
         }
 
         return back()->with('status', trans($response));
+    }
+
+    public function showChangePasswordForm()
+    {
+        return view('auth.passwords.change'); // Creeremo questa vista
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:8|confirmed',
+        ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'La password attuale non è corretta.']);
+        }
+
+        $user->update(['password' => Hash::make($request->new_password)]);
+
+        return redirect()->route('user')->with('success', 'Password aggiornata con successo!');
     }
 }

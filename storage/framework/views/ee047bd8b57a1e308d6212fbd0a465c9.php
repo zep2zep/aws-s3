@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
     <style>
         html,
         body {
@@ -163,21 +161,22 @@
 
         <div class="relative h-screen w-screen">
             <img id="background" class="absolute left-0 top-0 h-full w-full object-cover"
-                src="{{ Storage::disk('s3')->url('img/background.svg') }}" alt="SS3Laravel background" />
+                src="<?php echo e(Storage::disk('s3')->url('img/background.svg')); ?>" alt="SS3Laravel background" />
 
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
             <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
 
-                @if (session('success'))
+                <?php if(session('success')): ?>
                     <div class="d-flex justify-content-center">
                         <div class="alert alert-success d-flex justify-content-between align-items-center mt-4"
                             style="width:400px; border: 2px solid red;">
-                            {!! session('success') !!}
+                            <?php echo session('success'); ?>
+
                             <!-- Bottone per rimuovere il messaggio -->
                             <button id="close-message" class="btn btn-danger btn-sm ml-5">Clear</button>
                         </div>
                     </div>
-                @endif
+                <?php endif; ?>
 
             </div>
             <div class="container py-5">
@@ -185,12 +184,12 @@
 
                     <div class="col-md-6">
 
-                        @if (!auth()->user()->profile_image)
+                        <?php if(!auth()->user()->profile_image): ?>
                             <div class="flip-card-form mx-auto mb-3">
                                 <div class="flip-card-form mx-auto mb-3">
-                                    <form action="{{ route('upload.image') }}" method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        @method('PUT') <!-- Specifica che la richiesta sarà di tipo PUT -->
+                                    <form action="<?php echo e(route('upload.image')); ?>" method="POST" enctype="multipart/form-data">
+                                        <?php echo csrf_field(); ?>
+                                        <?php echo method_field('PUT'); ?> <!-- Specifica che la richiesta sarà di tipo PUT -->
 
                                         <div class="form-group">
                                             <label class="mb-2 ms-5 mt-2" for="profile_image">Carica la tua immagine</label>
@@ -204,18 +203,18 @@
                                     </form>
                                 </div>
                             </div>
-                        @endif
+                        <?php endif; ?>
 
                         <div class="flip-card mx-auto">
                             <div class="flip-card-inner">
                                 <div class="flip-card-front">
-                                    @if (auth()->user()->profile_image)
-                                        <img src="{{ Storage::disk('s3')->url(auth()->user()->profile_image) }}"
+                                    <?php if(auth()->user()->profile_image): ?>
+                                        <img src="<?php echo e(Storage::disk('s3')->url(auth()->user()->profile_image)); ?>"
                                             alt="Team Member" class="profile-img">
-                                    @endif
+                                    <?php endif; ?>
                                     <p>Benvenuto</p>
-                                    <h1 class="mt-2">{{ Auth::user()->name }}</h1>
-                                    <h1 class="mt-2">Ruolo {{ Auth::user()->role }}</h1>
+                                    <h1 class="mt-2"><?php echo e(Auth::user()->name); ?></h1>
+                                    <h1 class="mt-2">Ruolo <?php echo e(Auth::user()->role); ?></h1>
 
                                     <p class="mt-3">
                                         <span class="waving-hand">👋</span>Passa il mouse sopra la card per saperne di più!!
@@ -239,7 +238,7 @@
                             </div>
                         </div>
                         <div class="justify-content-center d-flex mt-3">
-                            <a href="{{ route('password.change') }}" class="btn btn-primary">Cambia Password</a>
+                            <a href="<?php echo e(route('password.change')); ?>" class="btn btn-primary">Cambia Password</a>
 
                         </div>
                     </div>
@@ -257,4 +256,6 @@
             location.reload();
         });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\PRJ\Laravel\aws-s3\resources\views/users/user.blade.php ENDPATH**/ ?>
